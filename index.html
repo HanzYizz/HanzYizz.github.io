@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farhan Maulana - Interactive Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+    </style>
+    <style>
+        :root {
+            --primary: #6e45e2;
+            --secondary: #88d3ce;
+            --dark: #2a2d3b;
+            --light: #f0f0f0;
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --dark-text: #e0e0e0;
+            --border-dark: #333333;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            background-color: var(--light);
+            color: var(--dark);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark-theme {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        body.dark-theme .bg-light {
+            background-color: var(--dark-bg) !important;
+        }
+        
+        body.dark-theme .card {
+            background-color: var(--dark-card);
+            border-color: var(--border-dark);
+            color: var(--dark-text);
+        }
+        
+        body.dark-theme .card .card-title,
+        body.dark-theme .card .card-text,
+        body.dark-theme .card .list-unstyled li,
+        body.dark-theme .card .list-unstyled li strong {
+            color: var(--dark-text) !important;
+        }
+
+        body.dark-theme .card .badge {
+            background-color: #555 !important;
+            color: var(--dark-text) !important;
+        }
+        
+        body.dark-theme .form-control,
+        body.dark-theme .form-select {
+            background-color: var(--dark-card);
+            border-color: var(--border-dark);
+            color: var(--dark-text);
+        }
+        
+        body.dark-theme .form-control:focus,
+        body.dark-theme .form-select:focus {
+            background-color: var(--dark-card);
+            color: var(--dark-text);
+        }
+        
+        body.dark-theme .nav-link,
+        body.dark-theme .navbar-brand {
+            color: var(--dark-text);
+        }
+        
+        body.dark-theme .text-dark {
+            color: var(--dark-text) !important;
+        }
+        
+        body.dark-theme .text-muted {
+            color: #a0a0a0 !important;
+        }
+        
+        body.dark-theme .btn-outline-primary {
+            color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        body.dark-theme .btn-outline-primary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        body.dark-theme .timeline-panel {
+            background-color: var(--dark-card);
+        }
+        
+        body.dark-theme .social-links a {
+            color: var(--dark-text);
+        }
+
+        body.dark-theme .gradient-text {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 300% 300%;
+            animation: gradient 8s ease infinite;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 300% 300%;
+            animation: gradient 8s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-pills .nav-link.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+        
+        .floating { 
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .card-hover-effect {
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card-hover-effect:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .skill-badge {
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        
+        .skill-badge:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .card-img-top:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 40px;
+        }
+        
+        .timeline-badge {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            margin-top: 7px;
+        }
+        
+        .timeline-badge:before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 7px;
+            height: calc(100% + 15px);
+            width: 1px;
+            background-color: #ddd;
+        }
+        
+        .timeline-item:last-child .timeline-badge:before {
+            display: none;
+        }
+        
+        .timeline-panel {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        #avatar-container {
+            perspective: 1000px;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        #avatar-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 4rem;
+            font-weight: bold;
+        }
+        #offcanvasNavbar {
+            background-color: var(--light); /* Latar belakang terang */
+        }
+
+        #offcanvasNavbar .offcanvas-title {
+            color: var(--dark); /* Warna teks judul gelap */
+        }
+
+        #offcanvasNavbar .nav-link {
+            color: var(--dark); /* Warna teks link gelap */
+        }
+
+        #offcanvasNavbar .btn-close {
+            /* Mengatur ulang filter agar tombol close terlihat di latar terang */
+            filter: none; 
+        }
+
+        /* Mode Gelap */
+        body.dark-theme #offcanvasNavbar {
+            background-color: var(--dark-bg); /* Latar belakang gelap */
+        }
+
+        body.dark-theme #offcanvasNavbar .offcanvas-title {
+            color: var(--dark-text) !important; /* Warna teks judul terang */
+        }
+
+        body.dark-theme #offcanvasNavbar .nav-link {
+            color: var(--dark-text); /* Warna teks link terang */
+        }
+
+        body.dark-theme #offcanvasNavbar .btn-close {
+            /* Filter untuk membuat tombol close menjadi putih */
+            filter: invert(1) grayscale(100) brightness(200%);
+        }
+
+        /* Mengatur warna link yang aktif agar selalu kontras */
+        #offcanvasNavbar .nav-pills .nav-link.active, 
+        #offcanvasNavbar .nav-link.active {
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="particles-js"></div>
+
+    <div style="position: relative; z-index: 1;">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand gradient-text" href="#">Portfolio<span class="text-warning">_</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title gradient-text" id="offcanvasNavbarLabel">Menu</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                            <li class="nav-item ms-2">
+                                <button id="theme-toggle" class="btn btn-sm btn-outline-light">
+                                    <i class="fas fa-moon"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section id="home" class="vh-100 d-flex align-items-center">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-3 fw-bold mb-4">
+                            Hi, I'm <span class="gradient-text">Farhan Maulana</span>
+                        </h1>
+                        <p class="lead mb-4" id="typing-text"></p>
+                        <div class="d-flex gap-3">
+                            <a href="#projects" class="btn btn-primary btn-lg px-4">My Work</a>
+                            <a href="#contact" class="btn btn-outline-primary btn-lg px-4">Hire Me</a>
+                        </div>
+                        <div class="mt-4 social-links">
+                            <a href="https://www.linkedin.com/in/hanzyiz" class="text-decoration-none me-3"><i class="fab fa-linkedin fa-2x"></i></a>
+                            <a href="https://github.com/hanzyiz" class="text-decoration-none me-3"><i class="fab fa-github fa-2x"></i></a>
+                            <a href="https://instagram.com/farhanmaulana.12" class="text-decoration-none"><i class="fab fa-instagram fa-2x"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div id="avatar-container" class="mt-5 mt-lg-0">
+                            <div id="3d-avatar">
+                                <div class="avatar-placeholder" id="avatar-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <img id="avatar-image" src="" alt="Farhan Maulana" class="img-fluid rounded-circle floating shadow-lg d-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-5 bg-light">
+            <div class="container py-5">
+                <h2 class="text-center mb-5 gradient-text">My Journey</h2>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="mb-4">About Me</h3>
+                        <p class="lead">A passionate Informatics student with a focus on Cybersecurity and Red Team techniques.</p>
+                        <p>I am a Cybersecurity-focused Informatics student at Universitas Bhayangkara Jakarta Raya. Through the Komunitas Merdeka Siber Academy, I gained valuable experience in Red Team strategies  and am now eager to launch my career in this field. I am proficient in web and Android penetration testing, conducting vulnerability analysis, and creating detailed technical reports.</p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <h5><i class="fas fa-user me-2"></i> Name</h5>
+                                    <p>Farhan Maulana</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5><i class="fas fa-envelope me-2"></i> Email</h5>
+                                    <p>maulanafarhan05@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <h5><i class="fas fa-map-marker-alt me-2"></i> Location</h5>
+                                    <p>Bekasi, Indonesia</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5><i class="fas fa-heart me-2"></i> Interests</h5>
+                                    <p>Coding, Cyber Security, penetration testing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3 class="mb-4">Experience Timeline</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-badge"></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title">Junior Penetration Testing</h4>
+                                        <p><small class="text-muted"><i class="fas fa-clock"></i> 2024 - Present</small></p>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>Merdeka Siber - Learning Cyber Security</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="timeline-item">
+                                <div class="timeline-badge"></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title">Web Developer</h4>
+                                        <p><small class="text-muted"><i class="fas fa-clock"></i> 2018 - 2021</small></p>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>Company XYZ - Developed various web applications.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-badge"></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title">Intern</h4>
+                                        <p><small class="text-muted"><i class="fas fa-clock"></i> 2017 - 2018</small></p>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>Startup DEF - Learned the ropes of web development.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+        </section>
+
+        <section id="skills" class="py-5">
+            <div class="container py-5">
+                <h2 class="text-center mb-5 gradient-text">My Skills</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="mb-4">Technical Skills</h3>
+                        <div class="skill-item mb-4">
+                            <div class="d-flex justify-content-between">
+                                <h5>Burpsuite</h5>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item mb-4">
+                            <div class="d-flex justify-content-between">
+                                <h5>PHP</h5>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item mb-4">
+                            <div class="d-flex justify-content-between">
+                                <h5>Linux</h5>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="mb-4">Professional Skills</h3>
+                        <div class="skill-item mb-4">
+                            <div class="d-flex justify-content-between">
+                                <h5>Communication</h5>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item mb-4">
+                            <div class="d-flex justify-content-between">
+                                <h5>Teamwork</h5>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item mb-4">
+                            <div class="d-flex justify-content-between">
+                                <h5>Problem Solving</h5>
+                                <span>92%</span>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h3 class="mb-4">Skill Tags</h3>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="skill-badge badge bg-primary p-2">HTML5</span>
+                            <span class="skill-badge badge bg-primary p-2">CSS3</span>
+                            <span class="skill-badge badge bg-primary p-2">JavaScript</span>
+                            <span class="skill-badge badge bg-primary p-2">Linux</span>
+                            <span class="skill-badge badge bg-primary p-2">Burpsuite</span>
+                            <span class="skill-badge badge bg-primary p-2">SQL</span>
+                            <span class="skill-badge badge bg-primary p-2">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-5 bg-light">
+            <div class="container py-5">
+                <h2 class="text-center mb-5 gradient-text">My Projects</h2>
+                <div class="text-center mb-5">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary filter-btn active" data-filter="all">All</button>
+                        <button type="button" class="btn btn-outline-primary filter-btn" data-filter="web">Web</button>
+                        <button type="button" class="btn btn-outline-primary filter-btn" data-filter="mobile">Mobile</button>
+                        <button type="button" class="btn btn-outline-primary filter-btn" data-filter="design">Design</button>
+                    </div>
+                </div>
+                <div class="row g-4" id="project-container">
+                    <div class="col-md-4 project-item" data-category="web">
+                        <div class="card card-hover-effect h-100">
+                            <div class="card-img-top position-relative overflow-hidden">
+                                <img src="cinema.png" class="img-fluid w-100" alt="Project 2">
+                                <div class="project-overlay">
+                                    <a href="https://cinema.rf.gd" class="btn btn-primary btn-sm">View Details</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Cinema App</h5>
+                                <p class="card-text">Web application for buying ticket</p>
+                                <div class="d-flex flex-wrap gap-1">
+                                    <span class="badge bg-secondary">PHP</span>
+                                    <span class="badge bg-secondary">Boostrap 5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+
+        <section id="contact" class="py-5">
+            <div class="container py-5">
+                <h2 class="text-center mb-5 gradient-text">Get In Touch</h2>
+                <div class="row">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <form id="contactForm" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" required>
+                                <div class="invalid-feedback">
+                                    Please provide your name.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid email.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" required>
+                                <div class="invalid-feedback">
+                                    Please provide a subject.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                                <div class="invalid-feedback">
+                                    Please provide a message.
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title mb-4">Contact Info</h3>
+                                <ul class="list-unstyled">
+                                    <li class="mb-3">
+                                        <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                                        <strong>Address:</strong> Bekasi, Indonesia
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="fas fa-phone me-2 text-primary"></i>
+                                        <strong>Phone:</strong> +62 89693968339
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="fas fa-envelope me-2 text-primary"></i>
+                                        <strong>Email:</strong> maulanafarhan05@gmail.com
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="fas fa-clock me-2 text-primary"></i>
+                                        <strong>Working Hours:</strong> Mon-Fri: 9AM - 5PM
+                                    </li>
+                                </ul>
+                                <hr>
+                                <div id="map" style="height: 250px; border-radius: 8px; overflow: hidden;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-dark text-white py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-0">© 2025 Farhan Maulana. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="social-links">
+                            <a href="#" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            emailjs.init('YOUR_USER_ID');
+
+            const typed = new Typed('#typing-text', {
+                strings: ["Web Developer", "Cyber Security", "Tech Enthusiast", "Problem Solver"],
+                typeSpeed: 50,
+                backSpeed: 30,
+                loop: true,
+                showCursor: true,
+                cursorChar: '|'
+            });
+
+            const themeToggle = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            const currentTheme = localStorage.getItem('theme') || 
+                                (prefersDarkScheme.matches ? 'dark' : 'light');
+            
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-theme');
+                let theme = 'light';
+                if (document.body.classList.contains('dark-theme')) {
+                    theme = 'dark';
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    theme = 'light';
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+                localStorage.setItem('theme', theme);
+            });
+
+            VanillaTilt.init(document.getElementById("3d-avatar"), {
+                max: 15,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.2,
+                gyroscope: true
+            });
+
+            const avatarImage = document.getElementById('avatar-image');
+            const avatarPlaceholder = document.getElementById('avatar-placeholder');
+            
+            const imageUrl = 'farhan-maulana.png';
+            
+            const img = new Image();
+            img.src = imageUrl;
+            img.onload = function() {
+                avatarImage.src = imageUrl;
+                avatarImage.classList.remove('d-none');
+                avatarPlaceholder.classList.add('d-none');
+            };
+            img.onerror = function() {
+                avatarPlaceholder.textContent = 'HanzYiz';
+            };
+
+            particlesJS("particles-js", {
+                particles: {
+                    number: { 
+                        value: 80, 
+                        density: { 
+                            enable: true, 
+                            value_area: 800 
+                        } 
+                    },
+                    color: { value: "#6e45e2" },
+                    shape: { type: "circle" },
+                    opacity: { 
+                        value: 0.5, 
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 1,
+                            opacity_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    size: { 
+                        value: 3, 
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 2,
+                            size_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    line_linked: { 
+                        enable: true, 
+                        distance: 150, 
+                        color: "#6e45e2", 
+                        opacity: 0.4, 
+                        width: 1 
+                    },
+                    move: { 
+                        enable: true, 
+                        speed: 2, 
+                        direction: "none", 
+                        random: true, 
+                        straight: false, 
+                        out_mode: "out",
+                        bounce: false,
+                        attract: {
+                            enable: true,
+                            rotateX: 600,
+                            rotateY: 1200
+                        }
+                    }
+                },
+                interactivity: {
+                    detect_on: "window",
+                    events: {
+                        onhover: { 
+                            enable: true, 
+                            mode: "repulse" 
+                        },
+                        onclick: { 
+                            enable: true, 
+                            mode: "push" 
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        repulse: {
+                            distance: 100,
+                            duration: 0.4
+                        },
+                        push: {
+                            particles_nb: 4
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectItems = document.querySelectorAll('.project-item');
+            const projectContainer = document.getElementById('project-container');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    gsap.to(projectItems, {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.3,
+                        onComplete: function() {
+                            projectItems.forEach(item => {
+                                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                                    item.style.display = 'block';
+                                } else {
+                                    item.style.display = 'none';
+                                }
+                            });
+                            
+                            gsap.to('.project-item', {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.5,
+                                stagger: 0.1
+                            });
+                        }
+                    });
+                });
+            });
+
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!contactForm.checkValidity()) {
+                    e.stopPropagation();
+                    contactForm.classList.add('was-validated');
+                    return;
+                }
+                
+                emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                    .then(function(response) {
+                        alert('Thank you for your message! I will get back to you soon.');
+                        contactForm.reset();
+                        contactForm.classList.remove('was-validated');
+                    }, function(error) {
+                        alert('Oops! Something went wrong. Please try again later.');
+                        console.log('FAILED...', error);
+                    });
+            }, false);
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                        
+                        const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('offcanvasNavbar'));
+                        if (offcanvas) {
+                            offcanvas.hide();
+                        }
+                    }
+                });
+            });
+
+            const voiceCommandBtn = document.getElementById('voice-command-btn');
+            const voiceFeedback = document.getElementById('voice-feedback');
+            
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+                
+                recognition.onstart = function() {
+                    voiceFeedback.textContent = "Listening...";
+                    voiceFeedback.classList.remove('d-none');
+                    voiceCommandBtn.innerHTML = '<i class="fas fa-microphone-slash fa-2x"></i>';
+                };
+                
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript.toLowerCase();
+                    voiceFeedback.textContent = `You said: "${transcript}"`;
+                    
+                    if (transcript.includes('home')) {
+                        window.location.href = '#home';
+                    } else if (transcript.includes('about')) {
+                        window.location.href = '#about';
+                    } else if (transcript.includes('skills') || transcript.includes('skill')) {
+                        window.location.href = '#skills';
+                    } else if (transcript.includes('projects') || transcript.includes('project')) {
+                        window.location.href = '#projects';
+                    } else if (transcript.includes('contact')) {
+                        window.location.href = '#contact';
+                    } else if (transcript.includes('dark mode') || transcript.includes('dark theme')) {
+                        document.body.classList.add('dark-theme');
+                        localStorage.setItem('theme', 'dark');
+                        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    } else if (transcript.includes('light mode') || transcript.includes('light theme')) {
+                        document.body.classList.remove('dark-theme');
+                        localStorage.setItem('theme', 'light');
+                        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    } else if (transcript.includes('send email')) {
+                        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                    }
+                };
+                
+                recognition.onerror = function(event) {
+                    voiceFeedback.textContent = "Error: " + event.error;
+                };
+                
+                recognition.onend = function() {
+                    voiceCommandBtn.innerHTML = '<i class="fas fa-microphone fa-2x"></i>';
+                    setTimeout(() => {
+                        voiceFeedback.classList.add('d-none');
+                    }, 3000);
+                };
+                
+                voiceCommandBtn.addEventListener('click', function() {
+                    recognition.start();
+                });
+            } else {
+                voiceCommandBtn.style.display = 'none';
+            }
+
+            gsap.registerPlugin(ScrollTrigger);
+            
+            gsap.from(".navbar", { 
+                duration: 1, 
+                y: -100, 
+                opacity: 0, 
+                ease: "bounce",
+                scrollTrigger: {
+                    trigger: "#home",
+                    start: "top top",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            gsap.utils.toArray("section").forEach(section => {
+                gsap.from(section, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+            
+            gsap.from("#avatar-container", {
+                duration: 1.5,
+                x: 100,
+                opacity: 0,
+                ease: "elastic.out(1, 0.5)",
+                scrollTrigger: {
+                    trigger: "#home",
+                    start: "top center",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            gsap.from(".social-links a", { 
+                duration: 0.5, 
+                y: 50, 
+                opacity: 0, 
+                stagger: 0.1,
+                delay: 1,
+                scrollTrigger: {
+                    trigger: "#home",
+                    start: "top center",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            gsap.from(".timeline-item", {
+                duration: 0.8,
+                x: -50,
+                opacity: 0,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: ".timeline",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            gsap.from(".progress-bar", {
+                width: 0,
+                duration: 2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: "#skills",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            function initMap() {
+                if (typeof google === 'undefined') return;
+                
+                const location = { lat: -6.2088, lng: 106.8456 };
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 12,
+                    center: location,
+                    styles: [
+                        {
+                            featureType: "all",
+                            elementType: "labels.text.fill",
+                            stylers: [{ saturation: 36 }, { color: "#333333" }, { lightness: 40 }]
+                        },
+                        {
+                            featureType: "all",
+                            elementType: "labels.text.stroke",
+                            stylers: [{ visibility: "on" }, { color: "#ffffff" }, { lightness: 16 }]
+                        },
+                        {
+                            featureType: "poi",
+                            elementType: "geometry",
+                            stylers: [{ color: "#f5f5f5" }, { lightness: 21 }]
+                        },
+                        {
+                            featureType: "road.highway",
+                            elementType: "geometry.fill",
+                            stylers: [{ color: "#ffffff" }, { lightness: 17 }]
+                        }
+                    ]
+                });
+                
+                const marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    icon: {
+                        url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                    }
+                });
+                
+                const infoWindow = new google.maps.InfoWindow({
+                    content: "<h5>My Location</h5><p>Jakarta, Indonesia</p>"
+                });
+                
+                marker.addListener('click', function() {
+                    infoWindow.open(map, marker);
+                });
+            }
+            
+            function loadGoogleMaps() {
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap`;
+                script.async = true;
+                script.defer = true;
+                document.body.appendChild(script);
+            }
+            
+            ScrollTrigger.create({
+                trigger: "#contact",
+                start: "top 70%",
+                onEnter: loadGoogleMaps,
+                once: true
+            });
+        });
+    </script>
+</body>
+</html>
